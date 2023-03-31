@@ -1,0 +1,16 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "dependencies": {
+    "concurrently": "^7.6.0",
+    "lerna": "^6.1.0",
+    "tsc": "^2.0.4"
+  },
+  "scripts": {
+    "start": "npm i; lerna exec npm i; concurrently \"cd backend; npm start\" \"cd frontend; npm start\""
+  }
+}
