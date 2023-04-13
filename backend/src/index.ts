@@ -3,9 +3,9 @@ import bodyParser from "body-parser"
 import cors from 'cors';
 import {faker} from '@faker-js/faker';
 import sqlite3 from 'sqlite3'
-import { open } from 'sqlite'
+import { Database, open } from 'sqlite'
 
-let db;
+let db: Database<sqlite3.Database, sqlite3.Statement>;
 const APP_PORT = 3000;
 const app = express();
 
@@ -24,24 +24,24 @@ interface Resident {
   room_id: string;
 }
 
-app.get('/residents', async (req: Request, res: Response) => {
-  const rows = await db.all(`SELECT * FROM residents;`);
+app.get('/residents', async (req: Request, res: Response< { data: Resident[]}>) => {
+  const rows = await db.all<Resident[]>(`SELECT * FROM residents;`);
   res.send({ data: rows });
 });
 
 app.get('/status', (req, res) => {
-  res.send('ok')
+  res.send('🟢 exacare-fullstack-interview backend is up and running')
 })
 
 app.listen(APP_PORT, async () => {
   db = await open({
+    // Restarting the server will not wipe the database, it is persisted to disk
     filename: '/tmp/database.db',
     driver: sqlite3.Database
   });
 
   await db.exec(`
-  DROP TABLE IF EXISTS residents;
-  CREATE TABLE residents (
+  CREATE TABLE IF NOT EXISTS residents (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
