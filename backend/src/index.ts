@@ -24,7 +24,7 @@ interface Resident {
   room_id: string;
 }
 
-app.get('/residents', async (req: Request, res: Response< { data: Resident[]}>) => {
+app.get('/residents', async (req, res: Response<{ data: Resident[]}>) => {
   const rows = await db.all<Resident[]>(`SELECT * FROM residents;`);
   res.send({ data: rows });
 });
@@ -35,7 +35,7 @@ app.get('/status', (req, res) => {
 
 app.listen(APP_PORT, async () => {
   db = await open({
-    // Restarting the server will not wipe the database, it is persisted to disk
+    // Restarting the server will not wipe the database, it is persisted to
     filename: '/tmp/database.db',
     driver: sqlite3.Database
   });
