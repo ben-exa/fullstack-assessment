@@ -16,15 +16,16 @@ $ npm start # this installs everthing for you as well
 # Requirements
 You are tasked with building out the frontend of a system that manages an assisted living facility's electronic health records. The requirements are as follows. You are not provided designs so just make the UI legible.
 
-## List Residents Page
+## 1) List Residents Page
 
-* Display all resident's information (frontend)
+Display all resident's information (frontend)
   * full name
   * picture
   * age in years
   * gender
   * room id
-* Pick one of the following
+
+## 2) Pick one of the following requirements
   * Pagination
     * Extend GET /residents endpoint to accept pagination query parameters such as page & count which will return a maximum count size for that page. Modify the frontend to interface with these new parameters.
   * Search query parameters
