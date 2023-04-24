@@ -25,7 +25,7 @@ interface Resident {
   dob: string;
   first_name: string;
   last_name: string;
-  facility_id: string;
+  community_id: string;
   room_id: string;
 }
 
