@@ -13,20 +13,20 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-interface Resident {
+interface ResidentPayload {
   id: string;
   image_url: string;
   gender: 'male' | 'female';
   dob: string;
   first_name: string;
   last_name: string;
-  facility_id: string;
+  community_id: string;
   room_id: string;
 }
 
-app.get('/residents', async (req, res: Response<{ data: Resident[]}>) => {
+app.get('/residents', async (req, res: Response<{ data: ResidentPayload[]}>) => {
   try {
-    const rows = await db.all<Resident[]>(`SELECT * FROM residents;`);
+    const rows = await db.all<ResidentPayload[]>(`SELECT * FROM residents;`);
     res.send({ data: rows });
   } catch (err) {
     console.error(err);
@@ -53,7 +53,7 @@ app.listen(APP_PORT, async () => {
     image_url TEXT,
     gender TEXT,
     dob DATE,
-    facility_id TEXT,
+    community_id TEXT,
     room_id TEXT
   );
   `);
@@ -66,7 +66,7 @@ app.listen(APP_PORT, async () => {
     mode: 'age',
   });
   await db.exec(`
-  INSERT INTO residents (first_name, last_name, gender, dob, facility_id, room_id, image_url)
+  INSERT INTO residents (first_name, last_name, gender, dob, community_id, room_id, image_url)
   VALUES
     ("${faker.name.firstName()}",
     "${faker.name.lastName()}",

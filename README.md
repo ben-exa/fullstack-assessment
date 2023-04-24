@@ -1,37 +1,12 @@
-# Assessment
-This assessment is meant to measure your competence in 
+# Context
 
-* developing a React application 
-* interfacing with a live API
-* navigating unclear requirements
-
-You are not graded on completing 100% of the objectives but rather your choice of implementation, communicating intent, and a reasonable throughput of completing requirements.
+Martha is a system administrator for a chain of retirement communities. Her software lists all residents information such as their name, date of birth, and which community they belong to. She has asked us to implement a search form that has inputs that shows relevant results according to the filters chosen. She also wants the ability to bookmark filters that are chosen in the URL. For example, when `http://localhost:3000?gender=male` is loaded, the gender filter is pre-selected and displays relevant community residents upon page load.
 
 # How to run the application
 
 ```shell
 $ npm start # this installs everthing for you as well
 ```
-
-# Requirements
-You are tasked with building out the frontend of a system that manages an assisted living facility's electronic health records. The requirements are as follows. You are not provided designs so just make the UI legible.
-
-## 1) List Residents Page
-
-Display all resident's information (frontend)
-  * full name
-  * picture
-  * age in years
-  * gender
-  * room id
-
-## 2) Pick one of the following requirements
-  * Pagination
-    * Extend GET /residents endpoint to accept pagination query parameters such as page & count which will return a maximum count size for that page. Modify the frontend to interface with these new parameters.
-  * Search query parameters
-    * Extend GET /residents endpoint to accept search query parameters that'll filter residents based on certain row attributes such as gender or first_name. Modify the frontend to interface with these new parameters.
-
-
 # API
 
 You are provided an API with the following interface to complete your requirements.

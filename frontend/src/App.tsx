@@ -1,32 +1,80 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import React from 'react';
 import './App.css'
 
+interface ResidentPayload {
+  id: string;
+  image_url: string;
+  gender: 'male' | 'female';
+  dob: string;
+  first_name: string;
+  last_name: string;
+  community_id: string;
+  room_id: string;
+}
+
+const ResidentRow: React.FC<{ resident: ResidentPayload }> = ({resident}) => {
+  return (
+    <tr>
+      <td>{resident.first_name}</td> 
+      <td>{resident.last_name}</td>
+      <td>{resident.gender}</td>
+      <td>{resident.dob}</td>
+      <td>{resident.community_id}</td>
+      <td>{resident.room_id}</td>
+    </tr>
+  );
+}
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [residents, setResidents] = React.useState<ResidentPayload[]>([])
+
+  const handleSearchResidents = (e: React.FormEvent) => {
+    e.preventDefault();
+    fetch('http://localhost:3000/residents')
+      .then(response => response.json())
+      .then((data: { data: ResidentPayload[]}) => {
+        setResidents(data.data)
+      })
+  };
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Search all community residents</h1>
+      <form onSubmit={handleSearchResidents}>
+        <label>
+          Resident's Name
+          <input type="text" placeholder="Resident's Name" />
+        </label>
+        <label>
+          Gender
+          <select>
+            <option value="" selected></option>
+            <option value="male">male</option>
+            <option value="female">female</option>
+          </select>
+        </label>
+        <button onClick={handleSearchResidents}>Search</button>
+      </form>
+      {residents.length > 0 && 
+      ( <><h1>{residents.length} Results:</h1>
+      <table>
+        <thead>
+          <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Gender</th>
+          <th>Date of Birth</th>
+          <th>Community ID</th>
+          <th>Room ID</th>
+          </tr>
+        </thead>
+        <tbody>
+      {
+        residents.map((resident) => <ResidentRow resident={resident} key={resident.id} />)
+      }
+      </tbody>
+      </table>
+      </>)}
     </div>
   )
 }
