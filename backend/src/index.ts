@@ -25,8 +25,13 @@ interface Resident {
 }
 
 app.get('/residents', async (req, res: Response<{ data: Resident[]}>) => {
-  const rows = await db.all<Resident[]>(`SELECT * FROM residents;`);
-  res.send({ data: rows });
+  try {
+    const rows = await db.all<Resident[]>(`SELECT * FROM residents;`);
+    res.send({ data: rows });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
 });
 
 app.get('/status', (req, res) => {
