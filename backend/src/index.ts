@@ -41,7 +41,7 @@ app.get('/status', (req, res) => {
 app.listen(APP_PORT, async () => {
   db = await open({
     // Restarting the server will not wipe the database, it is persisted to
-    filename: '/tmp/database.db',
+    filename: './database.db',
     driver: sqlite3.Database
   });
 
