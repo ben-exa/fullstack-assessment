@@ -11,6 +11,6 @@
     "tsc": "^2.0.4"
   },
   "scripts": {
-    "start": "npm i; lerna exec npm i; concurrently \"cd backend; npm start\" \"cd frontend; npm start\""
+    "start": "npm install; lerna exec npm install; concurrently \"cd backend; npm start\" \"cd frontend; npm start\""
   }
 }
