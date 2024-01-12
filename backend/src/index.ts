@@ -1,7 +1,8 @@
-import express, {Request, Response} from 'express';
+
+import express, { Request, Response } from 'express';
 import bodyParser from "body-parser"
 import cors from 'cors';
-import {faker} from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 import sqlite3 from 'sqlite3'
 import { Database, open } from 'sqlite'
 
@@ -24,10 +25,12 @@ interface Resident {
   room_id: string;
 }
 
-app.get('/residents', async (req, res: Response<{ data: Resident[]}>) => {
+app.get('/residents', async (req, res: Response<{ data: Resident[] }>) => {
   try {
-    const rows = await db.all<Resident[]>(`SELECT * FROM residents;`);
-    res.send({ data: rows });
+    setTimeout(async () => {
+      const rows = await db.all<Resident[]>(`SELECT * FROM residents;`);
+      res.send({ data: rows });
+    }, 2500);
   } catch (err) {
     console.error(err);
     res.status(500).send(err);
@@ -41,7 +44,7 @@ app.get('/status', (req, res) => {
 app.listen(APP_PORT, async () => {
   db = await open({
     // Restarting the server will not wipe the database, it is persisted to
-    filename: './database.db',
+    filename: `${process.cwd()}/database.db`,
     driver: sqlite3.Database
   });
 
@@ -57,15 +60,15 @@ app.listen(APP_PORT, async () => {
     room_id TEXT
   );
   `);
-  
+
   for (let x = 0; x < 500; x += 1) {
-  const gender = faker.name.sex();
-  const dob = faker.date.birthdate({
-    max: 90,
-    min: 45,
-    mode: 'age',
-  });
-  await db.exec(`
+    const gender = faker.name.sex();
+    const dob = faker.date.birthdate({
+      max: 90,
+      min: 45,
+      mode: 'age',
+    });
+    await db.exec(`
   INSERT INTO residents (first_name, last_name, gender, dob, facility_id, room_id, image_url)
   VALUES
     ("${faker.name.firstName()}",
@@ -81,7 +84,7 @@ app.listen(APP_PORT, async () => {
   console.log(`🟢 exacare-fullstack-interview backend listening on port ${APP_PORT}`)
 })
 
-function errorHandler (err, req, res, next) {
+function errorHandler(err, req, res, next) {
   if (res.headersSent) {
     return next(err)
   }
