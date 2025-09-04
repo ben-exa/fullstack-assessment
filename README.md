@@ -1,54 +1,52 @@
-# Assessment
-This assessment is meant to measure your competence in 
+# Fullstack Assessment
 
-* developing a React application 
-* interfacing with a live API
-* navigating unclear requirements
+This assessment is designed to measure your competence in:
 
-You are not graded on completing 100% of the objectives but rather your choice of implementation, communicating intent, and a reasonable throughput of completing requirements.
+- Ability to quickly understand and adapt to unfamiliar codebases
+- Implementing new features using technologies you may not have worked with before
+- Navigating unclear requirements and making tradeoffs
+- Communicating your thought process
 
-# How to run the application
-
-```shell
-$ npm start # this installs everthing for you as well
-```
+You are not expected to finish everything. **Completion is not the goal.** What matters is how you reason about the requirements, prioritize, and implement solutions.
 
 # Requirements
-You are tasked with building out the frontend of a system that manages an assisted living facility's electronic health records. The requirements are as follows. You are not provided designs so just make the UI legible.
 
-## 1) List Residents Page
+You are building out the Residents Management portion of an assisted living facility’s electronic health records system. You will be given a working API and frontend scaffold. Your task is to extend both. You can use anything that you find helpful to complete this task including AI.
 
-Display all resident's information (frontend)
-  * full name
-  * picture
-  * age in years
-  * gender
-  * room id
+## Residents List Page
 
-## 2) Pick one of the following requirements
-  * Pagination
-    * Extend GET /residents endpoint to accept pagination query parameters such as page & count which will return a maximum count size for that page. Modify the frontend to interface with these new parameters.
-  * Search query parameters
-    * Extend GET /residents endpoint to accept search query parameters that'll filter residents based on certain row attributes such as gender or first_name. Modify the frontend to interface with these new parameters.
+Create a page that retrieves data from the `/residents` API and displays it in a table.
 
+- Full name
+- Picture
+- Age in years
+- Gender
+- Room number
+- Days in facility
 
-# API
+The API returns a large dataset. You are free to decide how the frontend should handle and display it in a way that remains responsive and usable.
 
-You are provided an API with the following interface to complete your requirements.
+## Usability & Performance
 
-## GET /residents
+As you implement the Residents List Page, consider:
 
-```typescript
-interface Resident {
-  id: string;
-  image_url: string;
-  gender: 'male' | 'female';
-  dob: string;
-  first_name: string;
-  last_name: string;
-  facility_id: string;
-  room_id: string;
-}
+- How should the UI behave when the dataset is very large?
+- How should users navigate, search, or organize results?
+- How should the application remain performant when rendering large amounts of data?
 
-type FindResidentsResponseBody = Resident[]
+There is no single right answer. We are interested in your reasoning and the tradeoffs you make.
+
+# How to Run the Application
+
+```bash
+$ npm start # installs all dependencies and runs both the frontend and backend simultaneously
 ```
+
+## Frontend — GET http://localhost:3001
+
+A Hello World frontend is provided for you to get started.
+
+## API — GET http://localhost:3000/residents
+
+This API endpoint is provided for you to get started.
+
