@@ -33,6 +33,8 @@ As you implement the Residents List Page, consider:
 - How should the UI behave when the dataset is very large?
 - How should users navigate, search, or organize results?
 - How should the application remain performant when rendering large amounts of data?
+- How should the system behave when the network is unreliable?
+- How should state be managed between pages or components to avoid redundant data fetching?  
 
 There is no single right answer. We are interested in your reasoning and the tradeoffs you make.
 
