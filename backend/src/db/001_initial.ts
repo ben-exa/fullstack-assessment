@@ -27,7 +27,7 @@ export async function runMigration() {
 		// Then, generate residents and assign them to rooms
 		const residents = [];
 		for (let x = 0; x < 100; x += 1) {
-			const gender = faker.name.sex() as "male" | "female";
+			const gender = faker.person.sex() as "male" | "female";
 			const dob = faker.date.birthdate({
 				max: 90,
 				min: 45,
@@ -35,17 +35,17 @@ export async function runMigration() {
 			});
 
 			// Generate admission date between 1 day and 1 year ago
-			const admissionDate = faker.date.between(
-				new Date(Date.now() - 365 * 24 * 60 * 60 * 1000), // 1 year ago
-				new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
-			);
+			const admissionDate = faker.date.between({
+				from: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000), // 1 year ago
+				to: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
+			});
 
 			// Assign each resident to a random room
 			const randomRoom = faker.helpers.arrayElement(createdRooms);
 
 			residents.push({
-				first_name: faker.name.firstName(),
-				last_name: faker.name.lastName(),
+				first_name: faker.person.firstName(),
+				last_name: faker.person.lastName(),
 				gender: gender,
 				date_of_birth: dob,
 				admission_date: admissionDate,
@@ -68,14 +68,14 @@ export async function runMigration() {
 			billingAddresses.push({
 				resident_id: (resident as any).id,
 				full_name: fullName,
-				address_line_1: faker.address.streetAddress(),
+				address_line_1: faker.location.streetAddress(),
 				address_line_2: faker.helpers.maybe(
-					() => faker.address.secondaryAddress(),
+					() => faker.location.secondaryAddress(),
 					{ probability: 0.3 },
 				),
-				city: faker.address.city(),
-				zip_code: faker.address.zipCode(),
-				state: faker.address.state(),
+				city: faker.location.city(),
+				zip_code: faker.location.zipCode(),
+				state: faker.location.state(),
 			});
 		}
 

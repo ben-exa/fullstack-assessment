@@ -6,8 +6,8 @@
     "frontend"
   ],
   "dependencies": {
-    "concurrently": "^7.6.0",
-    "lerna": "^6.1.0",
+    "concurrently": "^9.2.1",
+    "lerna": "^9.0.1",
     "tsc": "^2.0.4"
   },
   "scripts": {
