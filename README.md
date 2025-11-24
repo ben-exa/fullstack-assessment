@@ -40,8 +40,11 @@ There is no single right answer. We are interested in your reasoning and the tra
 
 # How to Run the Application
 
+For BE/FE, download dependencies and run it in separate terminal instances.
 ```bash
-$ npm start # installs all dependencies and runs both the frontend and backend simultaneously
+$ cd backend; # or cd frontend
+$ npm i;
+$ npm start;
 ```
 
 ## Frontend — GET http://localhost:3001
