@@ -26,17 +26,17 @@ Create a page that retrieves data from the `/residents` API and displays it in a
 
 The API returns a large dataset. You are free to decide how the frontend should handle and display it in a way that remains responsive and usable.
 
-## Usability & Performance (P2)
+## Usability, Performance, and Resilience (P2)
 
-As you implement the Residents List Page, consider:
+As you implement the Residents List Page, you should:
+- Decide how the UI behaves with very large datasets
+- Make it easy to find residents
+- Keep rendering fast and responsive
+- Handle unreliable networks gracefully
+- Manage shared state to reduce redundant fetching
+- (Optional stretch) Ensure basic accessibility and responsiveness
 
-- How should the UI behave when the dataset is very large?
-- How should users navigate, search, or organize results?
-- How should the application remain performant when rendering large amounts of data?
-- How should the system behave when the network is unreliable?
-- How should state be managed between pages or components to avoid redundant data fetching?  
-
-There is no single right answer. We are interested in your reasoning and the tradeoffs you make.
+We care more about your reasoning and tradeoffs than about any specific choice of library or pattern.
 
 # How to Run the Application
 
