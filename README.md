@@ -13,7 +13,7 @@ You are not expected to finish everything. **Completion is not the goal.** What 
 
 You are building out the Residents Management portion of an assisted living facility’s electronic health records system. You will be given a working API and frontend scaffold. Your task is to extend both. You can use anything that you find helpful to complete this task including AI.
 
-## Residents List Page
+## Residents List Page (P1)
 
 Create a page that retrieves data from the `/residents` API and displays it in a table.
 
@@ -26,7 +26,7 @@ Create a page that retrieves data from the `/residents` API and displays it in a
 
 The API returns a large dataset. You are free to decide how the frontend should handle and display it in a way that remains responsive and usable.
 
-## Usability & Performance
+## Usability & Performance (P2)
 
 As you implement the Residents List Page, consider:
 
@@ -49,7 +49,7 @@ $ npm start;
 
 ## Frontend — GET http://localhost:3001
 
-A Hello World frontend is provided for you to get started.
+A Hello World React frontend is provided for you to get started.
 
 ## API — GET http://localhost:3000/residents
 
