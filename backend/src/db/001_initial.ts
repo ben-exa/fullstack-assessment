@@ -1,4 +1,16 @@
-import { faker } from "@faker-js/faker";
+import {
+	randFirstName,
+	randLastName,
+	randGender,
+	randBetweenDate,
+	rand,
+	randStreetAddress,
+	randCity,
+	randZipCode,
+	randState,
+	randChanceBoolean,
+	randAlphaNumeric,
+} from "@ngneat/falso";
 import { sequelize } from "./sequelize";
 import { Resident } from "../models/Resident";
 import { Room } from "../models/Room";
@@ -22,23 +34,23 @@ class InitialMigration {
 	): Promise<void> {
 		const residents = [];
 		for (let x = 0; x < 100; x += 1) {
-			const gender = faker.person.sex() as "male" | "female";
-			const dob = faker.date.birthdate({
-				max: 90,
-				min: 45,
-				mode: "age",
+			const gender = randGender() as "male" | "female";
+			const age = Math.floor(Math.random() * (90 - 45 + 1)) + 45;
+			const dob = randBetweenDate({
+				from: new Date(Date.now() - (age + 1) * 365 * 24 * 60 * 60 * 1000),
+				to: new Date(Date.now() - age * 365 * 24 * 60 * 60 * 1000),
 			});
 
-			const admissionDate = faker.date.between({
+			const admissionDate = randBetweenDate({
 				from: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000),
 				to: new Date(Date.now() - 24 * 60 * 60 * 1000),
 			});
 
-			const randomRoom = faker.helpers.arrayElement(rooms);
+			const randomRoom = rand(rooms);
 
 			residents.push({
-				first_name: faker.person.firstName(),
-				last_name: faker.person.lastName(),
+				first_name: randFirstName(),
+				last_name: randLastName(),
 				gender: gender,
 				date_of_birth: dob,
 				admission_date: admissionDate,
@@ -59,14 +71,13 @@ class InitialMigration {
 			billingAddresses.push({
 				resident_id: (resident as any).id,
 				full_name: fullName,
-				address_line_1: faker.location.streetAddress(),
-				address_line_2: faker.helpers.maybe(
-					() => faker.location.secondaryAddress(),
-					{ probability: 0.3 },
-				),
-				city: faker.location.city(),
-				zip_code: faker.location.zipCode(),
-				state: faker.location.state(),
+				address_line_1: randStreetAddress(),
+				address_line_2: randChanceBoolean({ chanceTrue: 0.3 })
+					? `Apt ${Math.floor(Math.random() * 999) + 1}`
+					: undefined,
+				city: randCity(),
+				zip_code: randZipCode(),
+				state: randState(),
 			});
 		}
 
@@ -88,31 +99,32 @@ class InitialMigration {
 		];
 
 		for (const resident of allResidents) {
-			const effectiveDate = faker.date.between({
+			const effectiveDate = randBetweenDate({
 				from: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000),
 				to: new Date(),
 			});
 
+			const policyNumber = Array.from({ length: 10 }, () => randAlphaNumeric())
+				.join("")
+				.toUpperCase();
+			const groupNumber = randChanceBoolean({ chanceTrue: 0.7 })
+				? Array.from({ length: 8 }, () => randAlphaNumeric())
+						.join("")
+						.toUpperCase()
+				: undefined;
+
 			insurances.push({
 				resident_id: (resident as any).id,
-				insurance_provider: faker.helpers.arrayElement(insuranceProviders),
-				policy_number: faker.string.alphanumeric({
-					length: 10,
-					casing: "upper",
-				}),
-				group_number: faker.helpers.maybe(
-					() => faker.string.alphanumeric({ length: 8, casing: "upper" }),
-					{ probability: 0.7 },
-				),
+				insurance_provider: rand(insuranceProviders),
+				policy_number: policyNumber,
+				group_number: groupNumber,
 				effective_date: effectiveDate,
-				expiration_date: faker.helpers.maybe(
-					() =>
-						faker.date.between({
+				expiration_date: randChanceBoolean({ chanceTrue: 0.5 })
+					? randBetweenDate({
 							from: effectiveDate,
 							to: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
-						}),
-					{ probability: 0.5 },
-				),
+						})
+					: undefined,
 			});
 		}
 
