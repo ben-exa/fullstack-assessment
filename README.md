@@ -1,13 +1,3 @@
-# Fullstack Assessment
-
-## What We're Evaluating
-
-- How quickly you understand and adapt to unfamiliar systems
-- How you implement product requirements end to end (API and UI)
-- How you make tradeoffs when requirements are incomplete or ambiguous
-- How clearly you communicate decisions, assumptions, and limitations
-- How you leverage search engines and AI LLMs responsibly to accelerate understanding and implementation
-
 ## Product Context
 
 We’re building the Residents Management module for an assisted living facility EHR. Staff use this screen daily to locate residents quickly, confirm details at a glance, and navigate reliably even on slow facility Wi-Fi.
@@ -43,7 +33,7 @@ Enable staff to quickly narrow the residents list when they are looking for a sp
 
 ### Product intent
 
-Staff often remember partial information. Sometimes a name fragment, sometimes a room number, sometimes both. The experience should support fast discovery without overwhelming the UI or degrading performance.
+Staff often remember partial information. Sometimes a name fragment, sometimes a room number, sometimes both. The experience should support fast discovery.
 
 ### Expectations
 
@@ -52,7 +42,15 @@ Staff often remember partial information. Sometimes a name fragment, sometimes a
 - Searching and filtering should work together in a way that feels intuitive.
 - The experience should remain usable and responsive with large datasets.
 
-# How to Run the Application
+## What We're Evaluating
+
+- How quickly you understand and adapt to unfamiliar systems
+- How you implement product requirements end to end (API and UI)
+- How you make tradeoffs when requirements are incomplete or ambiguous
+- How clearly you communicate decisions, assumptions, and limitations
+- How you leverage search engines and AI LLMs responsibly to accelerate understanding and implementation
+
+## How to Run the Application
 
 For BE/FE, download dependencies and run it in separate terminal instances.
 ```bash
@@ -61,11 +59,11 @@ $ npm i;
 $ npm start;
 ```
 
-## Frontend — GET http://localhost:3001
+### Frontend — GET http://localhost:3001
 
 A Hello World React frontend is provided for you to get started.
 
-## API — GET http://localhost:3000/residents
+### API — GET http://localhost:3000/residents
 
 This API endpoint is provided for you to get started.
 
