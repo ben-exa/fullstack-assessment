@@ -6,6 +6,7 @@
 - How you implement product requirements end to end (API and UI)
 - How you make tradeoffs when requirements are incomplete or ambiguous
 - How clearly you communicate decisions, assumptions, and limitations
+- How you leverage search engines and AI LLMs responsibly to accelerate understanding and implementation
 
 ## Product Context
 
