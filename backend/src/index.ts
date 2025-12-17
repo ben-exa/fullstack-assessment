@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Middleware for artificial latency
-const artificialLatency = (minMs: number = 500, maxMs: number = 5000) => {
+const artificialLatency = (minMs: number = 1000, maxMs: number = 5000) => {
 	return async (_req: Request, _res: Response, next: any) => {
 		const delay = Math.random() * (maxMs - minMs) + minMs;
 		await new Promise((resolve) => setTimeout(resolve, delay));

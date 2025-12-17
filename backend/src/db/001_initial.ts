@@ -1,7 +1,6 @@
 import {
 	randFirstName,
 	randLastName,
-	randGender,
 	randBetweenDate,
 	rand,
 	randStreetAddress,
@@ -18,23 +17,31 @@ import { BillingAddress } from "../models/BillingAddress";
 import { Insurance } from "../models/Insurance";
 
 class InitialMigration {
+	private readonly totalResidents = 221;
+	private readonly totalRooms = 100;
+
 	private async insertRooms() {
-		const rooms = [];
-		for (let i = 1; i <= 50; i++) {
-			rooms.push({
-				number: `Room ${i.toString().padStart(3, "0")}`,
-			});
+		const allPossibleRooms: string[] = [];
+		for (let letter = 65; letter <= 90; letter++) {
+			for (let digit = 1; digit <= 9; digit++) {
+				allPossibleRooms.push(`${String.fromCharCode(letter)}${digit}`);
+			}
 		}
 
-		return await Room.bulkCreate(rooms);
+		const shuffledRooms = allPossibleRooms.sort(() => Math.random() - 0.5);
+		const selectedRooms = shuffledRooms.slice(0, this.totalRooms).map((number) => ({
+			number,
+		}));
+
+		return await Room.bulkCreate(selectedRooms);
 	}
 
 	private async insertResidents(
 		rooms: Awaited<ReturnType<typeof Room.bulkCreate>>,
 	): Promise<void> {
 		const residents = [];
-		for (let x = 0; x < 100; x += 1) {
-			const gender = randGender() as "male" | "female";
+		for (let x = 0; x < this.totalResidents; x += 1) {
+			const gender = rand(["male", "female"]);
 			const age = Math.floor(Math.random() * (90 - 45 + 1)) + 45;
 			const dob = randBetweenDate({
 				from: new Date(Date.now() - (age + 1) * 365 * 24 * 60 * 60 * 1000),
