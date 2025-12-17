@@ -32,7 +32,6 @@ This screen is used frequently in a clinical setting. Staff need to quickly reco
 
 - Display a list of residents retrieved from the provided API.
 - Present key resident information in a way that is easy to scan and compare.
-- Include visual cues where appropriate to aid recognition.
 - Ensure the experience remains usable with a large number of residents.
 - Make reasonable decisions about data fetching, rendering, and state management.
 
