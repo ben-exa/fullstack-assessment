@@ -1,42 +1,56 @@
 # Fullstack Assessment
 
-This assessment is designed to measure your competence in:
+## What We're Evaluating
 
-- Ability to quickly understand and adapt to unfamiliar codebases
-- Implementing new features using technologies you may not have worked with before
-- Navigating unclear requirements and making tradeoffs
-- Communicating your thought process
+- How quickly you understand and adapt to unfamiliar systems
+- How you implement product requirements end to end (API and UI)
+- How you make tradeoffs when requirements are incomplete or ambiguous
+- How clearly you communicate decisions, assumptions, and limitations
 
-You are not expected to finish everything. **Completion is not the goal.** What matters is how you reason about the requirements, prioritize, and implement solutions.
+## Product Context
 
-# Requirements
+We’re building the Residents Management module for an assisted living facility EHR. Staff use this screen daily to locate residents quickly, confirm details at a glance, and navigate reliably even on slow facility Wi-Fi.
 
-You are building out the Residents Management portion of an assisted living facility’s electronic health records system. You will be given a working API and frontend scaffold. Your task is to extend both. You can use anything that you find helpful to complete this task including AI.
+You will receive:
+- A working API endpoint
+- A basic React frontend scaffold
 
-## Residents List Page (P1)
+Your job is to extend both where needed to meet the requirements below.
 
-Create a page that retrieves data from the `/residents` API and displays it in a table.
+## P1 - Residents Directory Table
 
-- Full name
-- Picture
-- Age in years
-- Gender
-- Room number
-- Days in facility
+### Goal
 
-The API returns a large dataset. You are free to decide how the frontend should handle and display it in a way that remains responsive and usable.
+Provide staff with a reliable, scannable view of all residents that supports day-to-day operational workflows.
 
-## Usability, Performance, and Resilience (P2)
+### Product intent
 
-As you implement the Residents List Page, you should:
-- Decide how the UI behaves with very large datasets
-- Make it easy to find residents
-- Keep rendering fast and responsive
-- Handle unreliable networks gracefully
-- Manage shared state to reduce redundant fetching
-- (Optional stretch) Ensure basic accessibility and responsiveness
+This screen is used frequently in a clinical setting. Staff need to quickly recognize residents, confirm basic demographic and stay information, and remain productive even when the system is under load or the dataset is large.
 
-We care more about your reasoning and tradeoffs than about any specific choice of library or pattern.
+### Expectations
+
+- Display a list of residents retrieved from the provided API.
+- Present key resident information in a way that is easy to scan and compare.
+- Include visual cues where appropriate to aid recognition.
+- Ensure the experience remains usable with a large number of residents.
+- Make reasonable decisions about data fetching, rendering, and state management.
+
+## P2 Resident Search and Filtering
+
+### Goal
+
+Enable staff to quickly narrow the residents list when they are looking for a specific person or location.
+
+### Product intent
+
+Staff often remember partial information. Sometimes a name fragment, sometimes a room number, sometimes both. The experience should support fast discovery without overwhelming the UI or degrading performance.
+
+### Expectations
+
+- Provide a way to search residents by name.
+- Provide a way to narrow results by room or location.
+- Searching and filtering should work together in a way that feels intuitive.
+- The experience should remain usable and responsive with large datasets.
 
 # How to Run the Application
 
